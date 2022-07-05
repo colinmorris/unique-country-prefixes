@@ -19,4 +19,18 @@ I used the repository [cristiroma/countries](https://github.com/cristiroma/count
 - For the flag icons used in the generated infographics. To load these images locally, you'll need to clone the countries repo under the root of this repo.
 - To generate countries.csv. I started from the file at countries/data/csv/countries.csv, then manually winnowed it down to just the UN member states, and manually updated the first 'name' column for a couple states to match the form currently used by the UN.
 
+## Infographic generation
 
+The IPython notebook prefixes.ipynb generates an html file `pres.html`.
+
+I then convert this into a pdf using Chrome's 'print to pdf' feature, using the minimal margin setting.
+
+Then I convert *that* to an image using the following Imagemagick invocation:
+
+```bash
+convert -density 150 -trim pres.pdf -quality 100 pres.jpg
+```
+
+(Grossly circuitous, I know.)
+
+The notebook also generates another html file, `spoilers.html`, which is identical except that it includes the css file `sstyles.css` rather than `styles.css`. This differs in that it shows the full name of each entry, rather than just a flag and prefix.
