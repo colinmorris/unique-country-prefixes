@@ -3,21 +3,23 @@ body {
 }
 
 h1 {
-    font-family: sans-serif;
+    font-family: Ubuntu;
     text-align: center;
     margin-bottom: .24em;
 }
 
 #preamble {
     border-bottom: initial;
-    margin-left: 1.2em;
+    margin-left: 0.8em;
     margin-bottom: 1em;
-    font-family: Asea, serif;
+    font-family: Ubuntu;
+    font-size: .91em;
+    line-height: 120%;
 }
 
 #preamble em {
     font-size: 1.2em;
-    padding: .1em;
+    padding: .1em .35em .1em .25em;
     background-color: #fff8ab;
 }
 
