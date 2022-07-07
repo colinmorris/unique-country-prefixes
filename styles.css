@@ -1,28 +1,10 @@
 body {
-    width: 720px;
-    background-color: #e6eff3;
+    width: 700px;
 }
-
-h1 {
-    font-family: sans-serif;
-    text-align: center;
+span.suff {
+   color: #fff; 
+   display: none;
 }
-
-img.flag {
-    width: 32px;
-    vertical-align: middle;
-    margin-bottom: 2px;
-    /*
-    border: 1px black solid; */
-}
-
-ul {
-    list-style-type: none;
-    /* chrome default is 1em */
-    margin-block-start: .4em;
-    margin-block-end: .4em;
-}
-
 
 #len2, #len3 {
     columns: 8;
@@ -35,31 +17,4 @@ ul {
 }
 #len8, #len9, #lenna {
     columns: 3;
-    margin-left: 1em;
-}
-
-#lenna {
-}
-
-li span {
-    font-size: 1.1em;
-    font-family: sans-serif;
-    font-variant-caps: all-small-caps;
-}
-
-span.pre {
-}
-
-span.suff {
-   color: #fff; 
-   display: none;
-}
-
-section {
-    border-bottom: 1px black solid;
-}
-
-h2 {
-    position: absolute;
-    margin-block-start: 0em;
 }

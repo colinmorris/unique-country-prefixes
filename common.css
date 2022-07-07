@@ -1,0 +1,90 @@
+body {
+    background-color: #e6eff3;
+}
+
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+    margin-bottom: .24em;
+}
+
+#preamble {
+    border-bottom: initial;
+    margin-left: 1.2em;
+    margin-bottom: 1em;
+    font-family: Asea, serif;
+}
+
+#preamble em {
+    font-size: 1.2em;
+    padding: .1em;
+    background-color: #fff8ab;
+}
+
+img.flag {
+    width: 32px;
+    vertical-align: middle;
+    margin-bottom: 2px;
+    /* SVG stuff */
+    height: 16px;
+    /* Hm, I think the default of centering is better actually.
+    object-position: right;
+    */
+    object-fit: scale-down;
+}
+
+
+ul {
+    list-style-type: none;
+    /* chrome default is 1em */
+    margin-block-start: .4em;
+    margin-block-end: .4em;
+}
+
+li span {
+    font-size: 1.05em;
+    font-family: monospace;
+    text-transform: uppercase;
+}
+
+/*
+li span {
+    font-family: Manjari, sans-serif;
+    font-weight: bold;
+}
+*/
+/*
+li span {
+    font-family: monospace;
+    font-size: 1.05em;
+    text-transform: uppercase;
+}
+*/
+
+section {
+    border-bottom: 1px black solid;
+}
+
+h2 {
+    position: absolute;
+    margin-block-start: -0.2em;
+    left: 13px;
+}
+section.lenna h2 {
+    font-size: 130%;
+    left: 4px;
+}
+
+#postamble {
+    margin-top: 10px;
+}
+
+#sig {
+    float: right;
+    font-size: .8em;
+    font-family: monospace;
+}
+
+#data {
+    font-size: .8em;
+}
