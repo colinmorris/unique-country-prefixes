@@ -23,14 +23,18 @@ I used the repository [cristiroma/countries](https://github.com/cristiroma/count
 
 The IPython notebook prefixes.ipynb generates an html file `pres.html`.
 
-I then convert this into a pdf using Chrome's 'print to pdf' feature, using the minimal margin setting.
+I then convert this into a pdf using Chrome's 'print to pdf' feature.
 
-Then I convert *that* to an image using the following Imagemagick invocation:
+Then I convert *that* to an image using an Imagemagick invocation along these lines:
 
 ```bash
-convert -density 150 -trim pres.pdf -quality 100 pres.jpg
+convert -density 150 -trim pres.pdf -quality 100 pres.png
 ```
 
 (Grossly circuitous, I know.)
 
-The notebook also generates another html file, `spoilers.html`, which is identical except that it includes the css file `sstyles.css` rather than `styles.css`. This differs in that it shows the full name of each entry, rather than just a flag and prefix.
+The notebook also generates another html file, `spoilers.html`, which is the 'answer' key version of the infographic with the full name of each country. It differs from the other html file in a few ways:
+- It includes the css file `sstyles.css`, which has some specific rules, e.g. making the "suffix" elements that show the remainder of a country's name after the MUP visible.
+- It excludes the explanatory "preamble" text under the title
+
+There is some ad-hoc fine-tuning that goes into the image conversion process. When printing to pdf, I'll generally set margins to 'none', and may fiddle with a custom 'scale' setting. When running imagemagick, I may or may not need to do some cropping of margins (either automatically using the `-trim` flag, or manually with `-crop`).
