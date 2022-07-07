@@ -4,10 +4,12 @@ class Trie:
     def __init__(self, char='', parent=None):
         # The character at this node (may be empty str in case of root)
         self.char = char
-        # Parent node
+        # Pointer to parent node
         self.parent = parent
         # Map from following characters to child nodes
         self.childmap = {}
+        # Whether this node represents the end of a complete word. e.g. the 'R'
+        # node at the end of 'NIGER'
         self.is_word = False
         
     @property
@@ -26,9 +28,6 @@ class Trie:
             return ''
         return self.parent.charseq + self.char
         
-    def __getitem__(self, k):
-        return self.childmap[k]
-    
     def add_string(self, s):
         if not s:
             return
@@ -41,15 +40,14 @@ class Trie:
         self.childmap[ch].add_string(s[1:])
         
     def wordy_children(self):
+        """Yield nodes in the subtree rooted at this node having the is_word flag set.
+        """
         if self.is_word:
             yield self
         for child in self.children:
             yield from child.wordy_children()
     
     def n_wordy_children(self):
-        """Return the number of nodes in the subtree rooted at this node having the
-        is_word flag set.
-        """
         return len(list(self.wordy_children()))
     
     def shortest_prefix(self):
@@ -65,40 +63,11 @@ class Trie:
         return shorter_prefix or self.charseq
     
     def shortest_unique_prefixes(self):
-        """yield a series of (a, b) tuples, where b is
-        a complete word, and a is the shortest unique prefix for that word.
+        """yield a series of (a, b) tuples, where b is a complete word, and a
+        is the shortest unique prefix for that word.
         """
-        wordies = self.wordy_children()
-        for wordy in wordies:
+        for wordy in self.wordy_children():
             word = wordy.charseq
             prefix = wordy.shortest_prefix()
             yield prefix, word
     
-    def postfix(self):
-        """Precondition: no more than 1 child
-        Return the sequence of characters from this node's char down to its leaf descendant.
-        """
-        if len(self.children) == 0:
-            return self.char
-        return self.char + self.children[0].postfix()
-    
-    def _shortest_unique_prefixes(self, pre='', post=''):
-        """When called with default params, yield a series of (a, b) tuples, where b is
-        a complete word, and a is the shortest unique prefix for that word.
-        
-        For recursive calls: Let i be the depth of the most recently seen "branch". Then pre is everything
-        up to and including i, and post is everything after
-        """
-        if len(self.children) == 0:
-            # I hate myself for not having a more elegant solution to this off-by-one error
-            yield pre + post[:1], post[1:] + self.char
-        else:
-            if len(self.children) == 1:
-                post += self.char
-            else:
-                pre = pre + post + self.char
-                post = ''
-            for child in self.children:
-                #yield from child.shortest_unique_prefixes(pre + self.char)
-                for x in child.shortest_unique_prefixes(pre, post):
-                    yield x
