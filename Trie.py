@@ -70,4 +70,37 @@ class Trie:
             word = wordy.charseq
             prefix = wordy.shortest_prefix()
             yield prefix, word
+
+    def walk(self):
+        yield self
+        for child in self.children:
+            yield from child.walk()
+
+    def to_dot(self):
+        """Return a representation of this tree in the dot language used by graphviz.
+        """
+        nodes = '\n'.join([node._dot_node() for node in self.walk()])
+        edgestrs = []
+        for node in self.walk():
+            edgestrs.extend(node._dot_edges())
+        edges = '\n'.join(edgestrs)
+        
+        return f"""digraph D {{
+{nodes}
+{edges}
+}}"""
     
+    @property
+    def _dotid(self):
+        return id(self)
+
+    def _dot_node(self):
+        label = self.char
+        return f'{self._dotid} [label="{label}"]'
+
+    def _dot_edges(self):
+        es = []
+        for child in self.children:
+            e = f"{self._dotid} -> {child._dotid}"
+            es.append(e)
+        return es
